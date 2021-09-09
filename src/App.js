@@ -1,37 +1,37 @@
 import logo from './logo.svg';
 import './App.css';
 
-const list = [
-    {
-        title: 'React',
-        url: 'https://reactjs.org/',
-        author: 'Jordan Walke',
-        points: 4,
-        objectId: 0,
-    },
-    {
-        title: 'Redux',
-        url: 'https://redux.js.org/',
-        author: 'Dan Abravoc, Andrew Clark',
-        num_comments: 2,
-        points: 5,
-        objectId: 1,
-    }
-]
 
-const App = () => (
-    <div>
-        <h1>My Hacker Stories</h1>
-        <Search/>
-        <hr/>
+const App = () => {
+    const stories = [
+        {
+            title: 'React',
+            url: 'https://reactjs.org/',
+            author: 'Jordan Walke',
+            points: 4,
+            objectId: 0,
+        },
+        {
+            title: 'Redux',
+            url: 'https://redux.js.org/',
+            author: 'Dan Abravoc, Andrew Clark',
+            num_comments: 2,
+            points: 5,
+            objectId: 1,
+        }
+    ];
 
-        {/* render the list here */}
-        {/* and by the way: that's how you do comments in JSX */}
+    return (
+        <div>
+            <h1>My Hacker Stories</h1>
+            <Search/>
+            <hr/>
 
-        <List/>
-        <List/>
-    </div>
-)
+            {/* render the list here */}
+            <List list={stories}/>
+        </div>
+    )
+}
 
 const Search = () => {
     const handleChange = (event) => {
@@ -46,21 +46,24 @@ const Search = () => {
         </div>
     )
 }
-const List = () => (
+const List = (props) => (
     <ul>
-        {list.map((item) => (
-            <li key={item.objectId}>
-                            <span>
-                                <a href={item.url}> {item.title}</a>
-                            </span>
-                <span>{item.author}</span>
-                <span>{item.num_comments}</span>
-                <span>{item.points}</span>
-            </li>
+        {props.list.map((item) => (
+            <Item key={item.objectId} item={item}/>
         ))}
     </ul>
 )
 
+const Item = (props) => (
+    <li>
+        <span>
+            <a href={props.item.url}> {props.item.title}</a>
+        </span>
+        <span>{props.item.author}</span>
+        <span>{props.item.num_comments}</span>
+        <span>{props.item.points}</span>
+    </li>
+)
 export default App;
 
 // <div className="App">
