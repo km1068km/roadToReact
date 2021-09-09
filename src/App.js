@@ -19,56 +19,42 @@ const list = [
     }
 ]
 
-function App() {
-    return (
+const App = () => (
+    <div>
+        <h1>My Hacker Stories</h1>
+        <Search/>
+        <hr/>
 
-        <div>
+        {/* render the list here */}
+        {/* and by the way: that's how you do comments in JSX */}
 
-            <h1>My Hacker Stories</h1>
-            <Search />
-            <hr/>
-
-            {/* render the list here */}
-            {/* and by the way: that's how you do comments in JSX */}
-
-            <List/>
-            <List/>
-
-        </div>
-
-
-    );
-}
-
-function Search() {
-    return (
-        <div>
-
-            <label htmlFor="search">Search: </label>
-            <input id="search" type="text"/>
-        </div>
+        <List/>
+        <List/>
+    </div>
 )
-}
 
-function List() {
-    return (
-        <ul>
-            {list.map(function (item) {
-                return (
-                    <li key={item.objectId}>
+const Search = () => (
+    <div>
+
+        <label htmlFor="search">Search: </label>
+        <input id="search" type="text"/>
+    </div>
+)
+
+const List = () => (
+    <ul>
+        {list.map((item) => (
+            <li key={item.objectId}>
                             <span>
                                 <a href={item.url}> {item.title}</a>
                             </span>
-                        <span>{item.author}</span>
-                        <span>{item.num_comments}</span>
-                        <span>{item.points}</span>
-                    </li>
-                );
-
-            })}
-        </ul>
-    )
-}
+                <span>{item.author}</span>
+                <span>{item.num_comments}</span>
+                <span>{item.points}</span>
+            </li>
+        ))}
+    </ul>
+)
 
 export default App;
 
