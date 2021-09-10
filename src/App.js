@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import React from "react";
 
+
 const App = () => {
     const stories = [
         {
@@ -20,7 +21,7 @@ const App = () => {
             objectId: 1,
         }
     ];
-    const [searchTerm, setSearchTerm] = React.useState('');
+    const [searchTerm, setSearchTerm] = React.useState('React');
 
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
@@ -33,8 +34,7 @@ const App = () => {
             <h1>My Hacker Stories</h1>
 
 
-
-            <Search onSearch={handleSearch} />
+            <Search search={searchTerm} onSearch={handleSearch}/>
             <hr/>
 
             {/* render the list here */}
@@ -43,32 +43,28 @@ const App = () => {
     )
 }
 
-const Search = (props) => {
-
-    return (
-        <div>
-
-            <label htmlFor="search">Search: </label>
-            <input id="search" type="text" onChange={props.onSearch}/>
-        </div>
-    )
-}
-const List = (props) => (
+const Search = ({search, onSearch}) => (
+    <div>
+        <label htmlFor="search">Search: </label>
+        <input id="search" type="text" value={search} onChange={onSearch}/>
+    </div>
+)
+const List = ({list}) => (
     <ul>
-        {props.list.map((item) => (
-            <Item key={item.objectId} item={item}/>
+        {list.map(({objectId, ...item}) => (
+            <Item key={objectId} {...item} />
         ))}
     </ul>
 )
 
-const Item = (props) => (
+const Item = ({title, url, author, num_comments, points}) => (
     <li>
         <span>
-            <a href={props.item.url}> {props.item.title}</a>
+            <a href={url}> {title}</a>
         </span>
-        <span>{props.item.author}</span>
-        <span>{props.item.num_comments}</span>
-        <span>{props.item.points}</span>
+        <span>{author}</span>
+        <span>{num_comments}</span>
+        <span>{points}</span>
     </li>
 )
 export default App;
